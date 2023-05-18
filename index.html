@@ -48,16 +48,18 @@
 
   <script>
     function togglePasswordVisibility() {
-      var passwordInput = document.getElementById("userpassword");
-      var passwordVisibilityButton = document.getElementsByTagName("checkbox")[0];
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        passwordVisibilityButton.textContent = "Hide Password";
-      } else {
-        passwordInput.type = "password";
-        passwordVisibilityButton.textContent = "Show Password";
-      }
-    }
+  var passwordInput = document.getElementById("userpassword");
+  var passwordCheckbox = document.getElementById("checkbox");
+
+  if (passwordCheckbox.checked) {
+    passwordInput.type = "text";
+    passwordCheckbox.nextElementSibling.textContent = "Hide Password";
+  } else {
+    passwordInput.type = "password";
+    passwordCheckbox.nextElementSibling.textContent = "Show Password";
+  }
+}
+
 
 document.getElementById('loginForm').addEventListener('submit', function (event) {
   event.preventDefault(); // Prevent form submission
