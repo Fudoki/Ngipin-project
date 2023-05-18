@@ -22,9 +22,6 @@ function logOut() {
 
 // Register an account
 
-document.getElementById('form-box').addEventListener('submit', function(event){
-  event.preventDefault(); // Prevent form submission
-
   // Get input values
   var username = document.getElementById('username').value;
   var password = document.getElementById('password').value;
@@ -33,7 +30,6 @@ document.getElementById('form-box').addEventListener('submit', function(event){
   var user = {
     username: username,
     password: password
-      }
   };
 
   // Check if local storage already has registered users
