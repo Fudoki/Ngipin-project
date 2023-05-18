@@ -106,53 +106,91 @@
 
   <!--booking appoinment section start -->
   <section class="book" id="book">
-    <h1 class="heading"> <span>book</span> now </h1>
-
-    <div class="row">
-
-      <div class="image">
-        <img src="https://i.postimg.cc/DZt01LWv/im.jpg">
-      </div>
-
-      <form action="">
-        <h3>book appointment</h3>
-        <input type="text" placeholder="Your Full Name" class="box">
-        <input type="number" placeholder="Your Age" class="box">
-        <input type="number" placeholder="Your Contact Number" class="box">
-        <input type="email" placeholder="Your Email" class="box">
-        <input type="date" class="box"> <br>
-        <input type="time" id="appointmentTime" class="box" required> <br>
-        <label for="doctor">Select Doctor:</label>
-        <select id="doctor" name="doctor">
-          <option value="Dr. John Doe">Dr. John Doe</option>
-          <option value="Dr. Jane Smith">Dr. Jane Smith</option>
-          <option value="Dr. David Johnson">Dr. David Johnson</option>
-          <option value="Dr. Sarah Williams">Dr. Sarah Williams</option>
-        </select> <br> <br>
-        <input type="submit" href="#divOne" value="book now" class="btn">
-      </form>
+  <h1 class="heading"> <span>book</span> now </h1>
+<h2>Appointments</h2>
+<ul id="appointmentList"></ul>
+  <div class="row">
+    <div class="image">
+      <img src="https://i.postimg.cc/DZt01LWv/im.jpg">
     </div>
 
-    <div class="overlay" id="divOne">
-		<div class="wrapper">
-			<h2>Please Fill up The Form</h2><a class="close" href="#">&times;</a>
-			<div class="content">
-				<div class="container">
-					<form>
-						<label>First Name</label>
-						<input placeholder="Your name.." type="text">
-						<label>Last Name</label>
-						<input placeholder="Your last name.." type="text">
-						<label>Subject</label> 
-						<textarea iplaceholder="Write something.."></textarea>
-						<input type="submit" value="Submit">
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
-    
-  </section>
+    <form id="appointmentForm" action="">
+      <h3>book appointment</h3>
+      <input type="text" placeholder="Your Full Name" class="box"> <br>
+      <input type="number" placeholder="Your Age" class="box"><br>
+      <input type="number" placeholder="Your Contact Number" class="box"><br>
+      <input type="email" placeholder="Your Email" class="box"><br>
+      <input type="date" class="box"> <br>
+      <input type="time" id="appointmentTime" class="box" required> <br>
+      <label for="appointmentReason">Select appointment for:</label>
+      <select id="appointmentReason" name="appointmentReason">
+        <option value="checkup">Checkup</option>
+        <option value="tooth-fillings">Tooth Fillings</option>
+        <option value="tooth-extraction">Tooth Extraction</option>
+        <option value="teeth-cleaning">Teeth Cleaning</option>
+      </select> <br> <br>
+      <label for="doctor">Select Doctor:</label>
+      <select id="doctor" name="doctor">
+        <option value="Dr. John Doe">Dr. John Doe</option>
+        <option value="Dr. Jane Smith">Dr. Jane Smith</option>
+        <option value="Dr. David Johnson">Dr. David Johnson</option>
+        <option value="Dr. Sarah Williams">Dr. Sarah Williams</option>
+      </select> <br> <br>
+      <input type="submit" value="Submit" class="btn">
+    </form>
+  </div>
+
+  
+</section>
+
+<script>
+ // Add event listener to the appointment form
+document.getElementById("appointmentForm").addEventListener("submit", function(e) {
+  e.preventDefault(); // Prevent form submission
+
+  // Retrieve form values
+  var fullName = document.querySelector("#appointmentForm input[type='text']").value;
+  var age = document.querySelector("#appointmentForm input[type='number']").value;
+  var contactNumber = document.querySelector("#appointmentForm input[type='number']").value;
+  var email = document.querySelector("#appointmentForm input[type='email']").value;
+  var appointmentDate = document.querySelector("#appointmentForm input[type='date']").value;
+  var appointmentTime = document.querySelector("#appointmentTime").value;
+  var appointmentReason = document.querySelector("#appointmentReason").value;
+  var doctor = document.querySelector("#doctor").value;
+
+  // Create an object to store appointment details
+  var appointment = {
+    fullName: fullName,
+    age: age,
+    contactNumber: contactNumber,
+    email: email,
+    appointmentDate: appointmentDate,
+    appointmentTime: appointmentTime,
+    appointmentReason: appointmentReason,
+    doctor: doctor
+  };
+
+  // Retrieve existing appointments from local storage
+  var appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+
+  // Add the new appointment to the array
+  appointments.push(appointment);
+
+  // Store the updated appointments array in local storage
+  localStorage.setItem("appointments", JSON.stringify(appointments));
+
+  // Call function to update the table in adminpage.html
+  parent.postMessage({ appointments: appointments }, "*");
+
+  // Reset the form
+  document.getElementById("appointmentForm").reset();
+});
+
+// Load and display appointments on page load
+window.addEventListener("load", function() {
+  displayAppointments();
+});
+</script>
 
   <!--booking appoinment section end -->
 
