@@ -31,7 +31,7 @@
           <label>Password</label>
         </div>
         <div class="remember-forgot">
-          <p><input type="checkbox" onclick="togglePasswordVisibility()"> Show Password </p>
+          <p><input type="checkbox" onclick="togglePasswordIndex()"> Show Password </p>
         </div>
         <select class="custom-select">
           <option value="option1"> User </option>
@@ -47,18 +47,6 @@
   </div>
 
   <script>
-function togglePasswordVisibility() {
-      var passwordInput = document.getElementById("userpassword");
-      var confirmPasswordInput = document.getElementById("confirmUserPassword");
-      var passwordVisibilityButton = document.getElementsByTagName("input")[0];
-      if (passwordInput.type === "password") {
-        passwordInput.type = "text";
-        passwordVisibilityButton.checked = true;
-      } else {
-        passwordInput.type = "password";
-        passwordVisibilityButton.checked = false;
-      }
-    }
 
 
 document.getElementById('loginForm').addEventListener('submit', function (event) {
@@ -91,9 +79,9 @@ document.getElementById('loginForm').addEventListener('submit', function (event)
 });
 
 
-
-
+ <script src="script.js"></script>
   </script>
+  <script>
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>
