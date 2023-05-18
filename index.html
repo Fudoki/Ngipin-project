@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=, initial-scale=1.0">
+  <title>PnCare</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <div class="wrapper">
+    <span class="icon-close">
+      <ion-icon name="close-outline"></ion-icon>
+    </span>
+
+    <div class="form-box log in">
+      <h2>Log in</h2>
+      <form id="loginForm">
+        <div class="input-box">
+          <span class="icon">
+            <ion-icon name="mail"></ion-icon>
+          </span>
+          <input type="text" id="username" required>
+          <label>Username</label>
+        </div>
+        <div class="input-box">
+          <span class="icon">
+            <ion-icon name="lock-closed"></ion-icon>
+          </span>
+          <input type="password" id="userpassword" required>
+          <label>Password</label>
+        </div>
+        <div class="remember-forgot">
+          <p><input type="checkbox" onclick="togglePasswordVisibility()"> Show Password </p>
+        </div>
+        <select class="custom-select">
+          <option value="option1"> User </option>
+          <option value="option2"> Admin </option>
+        </select>
+        <br></br>
+        <button type="submit" class="btn">Login </button>
+        <div class="login-register">
+          <p>Don't have an account? <a href="register.html">Register here</a></p>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function togglePasswordVisibility() {
+      var passwordInput = document.getElementById("userpassword");
+      var passwordVisibilityButton = document.getElementsByTagName("checkbox")[0];
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        passwordVisibilityButton.textContent = "Hide Password";
+      } else {
+        passwordInput.type = "password";
+        passwordVisibilityButton.textContent = "Show Password";
+      }
+    }
+
+document.getElementById('loginForm').addEventListener('submit', function (event) {
+  event.preventDefault(); // Prevent form submission
+
+  var username = document.getElementById('username').value;
+  var password = document.getElementById('userpassword').value;
+
+  // Retrieve registered users from local storage
+  var registeredUsers = localStorage.getItem('registeredUsers');
+  if (registeredUsers) {
+    registeredUsers = JSON.parse(registeredUsers);
+    var foundUser = registeredUsers.find(function (user) {
+      return user.username === username && user.password === password;
+    });
+
+    if (foundUser) {
+      alert('You logged in successfully!');
+      var optionSelected = document.querySelector('.custom-select').value;
+      if (optionSelected === 'option1') {
+        // Redirect to the admin page
+        window.location.assign('home.html');
+      } else { 
+        window.location.assign('adminpage.html');
+      }
+    } else {
+      alert('Your username or password is incorrect. No registered users found. Please register an account.');
+    }
+  }
+});
+
+
+
+
+  </script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+
+</html>
