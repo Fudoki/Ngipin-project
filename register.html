@@ -96,6 +96,7 @@
           localStorage.setItem('currentUser', JSON.stringify(user));
 
           alert('Registration successful!');
+          window.location.assign('home.html');
           document.getElementById('registrationForm').reset(); // Reset the form
         } else {
           alert('Passwords do not match. Please confirm your password correctly.');
