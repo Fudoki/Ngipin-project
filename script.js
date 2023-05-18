@@ -19,6 +19,19 @@ function logOut() {
   alert('You logged out successfully..');
 }
 
+function togglePasswordIndex() {
+      var passwordInput = document.getElementById("userpassword");
+      var confirmPasswordInput = document.getElementById("confirmUserPassword");
+      var passwordVisibilityButton = document.getElementsByTagName("input")[0];
+      if (passwordInput.type === "password") {
+        passwordInput.type = "text";
+        passwordVisibilityButton.checked = true;
+      } else {
+        passwordInput.type = "password";
+        passwordVisibilityButton.checked = false;
+      }
+    }
+
 // Register an account
 var registrationForm = document.getElementById('form-box');
 if (registrationForm) {
