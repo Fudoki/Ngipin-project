@@ -50,6 +50,7 @@ document.getElementById('form-box').addEventListener('submit', function(event) {
   
   alert('Registration successful!');
   document.getElementById('registrationForm').reset(); // Reset the form
+  window.location.assign('home.html');
 });
 
 
