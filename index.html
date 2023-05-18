@@ -49,13 +49,14 @@
   <script>
 function togglePasswordVisibility() {
       var passwordInput = document.getElementById("userpassword");
-      var passwordVisibilityButton = document.getElementsByTagName("checkbox")[0];
+      var confirmPasswordInput = document.getElementById("confirmUserPassword");
+      var passwordVisibilityButton = document.getElementsByTagName("input")[0];
       if (passwordInput.type === "password") {
         passwordInput.type = "text";
-        passwordVisibilityButton.textContent = "Hide Password";
+        passwordVisibilityButton.checked = true;
       } else {
         passwordInput.type = "password";
-        passwordVisibilityButton.textContent = "Show Password";
+        passwordVisibilityButton.checked = false;
       }
     }
 
