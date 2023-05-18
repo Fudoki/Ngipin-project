@@ -1,3 +1,4 @@
+John Kevz Patz
 <!DOCTYPE html>
 <html>
 
@@ -13,9 +14,8 @@
       <a href="#" class="logo"><i class="fas fa-tooth"></i> pncCare. </a>
     </div>
     <ul>
-      <li><a  id="appointmentsLink">Appointments</a></li>
-      <li><a  id="dentistsLink">Dentists</a></li>
-       <li><a  id="usersLink">Registered Users</a>
+      <li><a href="#" id="appointmentsLink">Appointments</a></li>
+      <li><a href="#" id="dentistsLink">Dentists</a></li>
       <li><a href="index.html" id="adminLogout">Logout</a></li>
 
     </ul>
@@ -23,20 +23,20 @@
   <div class="content" id="appointmentsContent">
     <h2>Appointment</h2><br>
     <table>
-      <thead>
-        <tr>
-          <th>ID</th>
-          <th>Name</th>
-          <th>Age</th>
-          <th>Contact Number</th>
-          <th>Email</th>
-          <th>dentist</th>
-        </tr>
-      </thead>
-      <tbody>
-        <!-- Add your table rows here -->
-      </tbody>
-    </table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Name</th>
+      <th>Age</th>
+      <th>Contact Number</th>
+      <th>Email</th>
+      <th>Dentist</th>
+    </tr>
+  </thead>
+  <tbody id="appointmentTableBody">
+    <!-- Add your table rows here dynamically using JavaScript -->
+  </tbody>
+</table>
   </div>
 
   <div class="content" id="dentistsContent">
@@ -94,40 +94,7 @@
       </tbody>
     </table>
   </div>
-      
-  <div class="content" id="usersContent">
-      <h2>Registered Users</h2>
-      <br>
-      <div id="edit-user-container">
-        <form id="edit-user-form">
-          <div class="form-field">
-            <label for="edit-username">Username:</label>
-            <input type="text" id="edit-username" required>
-          </div>
-          <div class="form-field">
-            <label for="edit-password">Password:</label>
-            <input type="password" id="edit-password" required>
-          </div>
-          <button type="submit" id="edit-user-btn">Edit User</button>
-        </form>
-      </div>
-      <br>
-    
-      <table id="users-table">
-        <thead>
-          <tr>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody id="users-table-body">
-          <!-- Table rows for registered users will be dynamically added here -->
-        </tbody>
-      </table>
-    </div>
 
-    
 
   <script>
     // Hide all content sections except for the "Appointments" section
@@ -172,7 +139,7 @@
         const tableRows = doctorsTableBody.querySelectorAll('tr');
         tableRows.forEach((row, index) => {
           const doctorId = index + 1;
-          row.setAttribute('id', `doctor-${doctorId}`);
+          row.setAttribute('id', doctor-${doctorId});
           row.querySelector('td:first-child').textContent = doctorId;
         });
 
@@ -201,7 +168,7 @@
       removeDoctorForm.addEventListener('submit', (event) => {
         event.preventDefault();
         const removeDoctorId = removeDoctorIdInput.value;
-        const tableRow = document.getElementById(`doctor-${removeDoctorId}`);
+        const tableRow = document.getElementById(doctor-${removeDoctorId});
         if (tableRow) {
           tableRow.remove();
           updateTableRowIds();
@@ -217,7 +184,7 @@
         const speciality = document.getElementById('speciality').value;
 
         const newRow = document.createElement('tr');
-        newRow.setAttribute('id', `doctor-${doctorCount}`);
+        newRow.setAttribute('id', doctor-${doctorCount});
 
         const idCell = document.createElement('td');
         idCell.textContent = doctorCount;
@@ -251,7 +218,7 @@
         const tableData = JSON.parse(storedData);
         tableData.forEach(data => {
           const newRow = document.createElement('tr');
-          newRow.setAttribute('id', `doctor-${data.id}`);
+          newRow.setAttribute('id', doctor-${data.id});
 
           const idCell = document.createElement('td');
           idCell.textContent = data.id;
@@ -276,6 +243,54 @@
       }
     });
   </script>
+
+  <script>
+  // Function to display the appointments on the UI
+function displayAppointments() {
+  var appointmentTableBody = document.getElementById("appointmentTableBody");
+  var appointments = JSON.parse(localStorage.getItem("appointments")) || [];
+
+  // Clear the existing table rows
+  appointmentTableBody.innerHTML = "";
+
+  // Loop through the appointments and create table rows
+  appointments.forEach(function(appointment, index) {
+    var row = document.createElement("tr");
+
+    // Create table cells and populate them with appointment data
+    var idCell = document.createElement("td");
+    idCell.textContent = index + 1; // Use index + 1 for ID numbering
+    row.appendChild(idCell);
+
+    var nameCell = document.createElement("td");
+    nameCell.textContent = appointment.fullName;
+    row.appendChild(nameCell);
+
+    var ageCell = document.createElement("td");
+    ageCell.textContent = appointment.age;
+    row.appendChild(ageCell);
+
+    var contactCell = document.createElement("td");
+    contactCell.textContent = appointment.contactNumber;
+    row.appendChild(contactCell);
+
+    var emailCell = document.createElement("td");
+    emailCell.textContent = appointment.email;
+    row.appendChild(emailCell);
+
+    var dentistCell = document.createElement("td");
+    dentistCell.textContent = appointment.doctor;
+    row.appendChild(dentistCell);
+
+    appointmentTableBody.appendChild(row);
+  });
+}
+
+// Load and display appointments on page load
+window.addEventListener("load", function() {
+  displayAppointments();
+});
+</script>
 </body>
 
 </html>
