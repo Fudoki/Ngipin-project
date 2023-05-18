@@ -1,4 +1,3 @@
-
 // User account Interface
 let menu = document.querySelector('#menu-btn');
 let navbar = document.querySelector('.navbar');
@@ -21,6 +20,9 @@ function logOut() {
 
 
 // Register an account
+
+document.getElementById('form-box').addEventListener('submit', function(event) {
+  event.preventDefault(); // Prevent form submission
 
   // Get input values
   var username = document.getElementById('username').value;
@@ -47,7 +49,6 @@ function logOut() {
   
   alert('Registration successful!');
   document.getElementById('registrationForm').reset(); // Reset the form
-  window.location.assign('home.html');
 });
 
 
@@ -109,4 +110,5 @@ function appointment() {
     });
   });
 }
+
 
